@@ -1,17 +1,19 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
-import {addPersonalInfo, onChangeNameInfo} from "../../store/personal-info-reducer";
+import {addPersonalInfo} from "../../store/personal-info-reducer";
 import React, {useEffect} from "react";
 import {fetchOccupation} from "../../api/api";
 
 const PersonalInfoComponent = () => {
     const dispatch = useDispatch()
-
+    let occupation = useSelector(state => state.personalInfo.occupation)
+    useEffect(() => {
+        dispatch(fetchOccupation())
+    }, [])
     const {
         register,
         handleSubmit,
         formState: {errors},
-        watch
     } = useForm({mode: "onChange"})
 
     function onSubmit(data, e) {
@@ -19,23 +21,12 @@ const PersonalInfoComponent = () => {
             ...data, occupation: data.occupation.toUpperCase()
         }
         dispatch(addPersonalInfo(newData))
+        console.log(newData)
         e.target.reset()
     }
-
-    useEffect(() => {
-        dispatch(fetchOccupation())
-    }, [])
-
-    let occupation = useSelector(state => state.personalInfoReducer.occupation)
-    console.log(occupation)
-
-    useEffect(() => {
-        dispatch(onChangeNameInfo(newName))
-    }, [watch])
-    let newName = watch('firstName')
-    console.log(newName)
-
+    if(occupation) {
     return (
+
         <form onSubmit={handleSubmit(onSubmit)}>
             <div style={{
                 display: 'flex',
@@ -47,7 +38,7 @@ const PersonalInfoComponent = () => {
                 <div>
                     <div>
                         <div>First Name</div>
-                        <input defaultValue={''} {...register('firstName', {required: true, maxLength: 15})}/>
+                        <input {...register('firstName', {required: true, maxLength: 15})}/>
                         {errors.firstName && <i>name.error.required</i>}
                     </div>
                     <div>
@@ -61,14 +52,14 @@ const PersonalInfoComponent = () => {
                         <div>Occupation</div>
                         <select  {...register('occupation',)} onChange={() => {
                         }}>
-                            {occupation.map(i => <option value={i.toUpperCase()}>{i}</option>)}
+                            {occupation.map(i => <option key={i} value={i.toUpperCase()}>{i}</option>)}
                         </select>
                     </div>
                     <input type="submit"/>
                 </div>
             </div>
         </form>
-    )
+    )}
 }
 
 export default PersonalInfoComponent

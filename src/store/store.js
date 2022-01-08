@@ -6,8 +6,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
-    personalInfoReducer: personalInfoReducer,
-    skillsReducer: skillsReducer
+    personalInfo: personalInfoReducer,
+    skills: skillsReducer
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
