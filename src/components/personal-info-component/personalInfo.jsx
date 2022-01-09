@@ -1,15 +1,17 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
-import {addPersonalInfo} from "../../store/personal-info-reducer";
 import React, {useEffect} from "react";
-import {fetchOccupation} from "../../api/api";
+import {fetchOccupation, sendPersonalInfo} from "../../api/api";
 
 const PersonalInfoComponent = () => {
     const dispatch = useDispatch()
     let occupation = useSelector(state => state.personalInfo.occupation)
+
     useEffect(() => {
         dispatch(fetchOccupation())
-    }, [])
+    }, [dispatch])
+
+
     const {
         register,
         handleSubmit,
@@ -20,7 +22,7 @@ const PersonalInfoComponent = () => {
         let newData = {
             ...data, occupation: data.occupation.toUpperCase()
         }
-        dispatch(addPersonalInfo(newData))
+        dispatch(sendPersonalInfo(newData))
         console.log(newData)
         e.target.reset()
     }
@@ -50,10 +52,11 @@ const PersonalInfoComponent = () => {
                 <div>
                     <div>
                         <div>Occupation</div>
-                        <select  {...register('occupation',)} onChange={() => {
+                        <select  {...register('occupation', {required: true})} onChange={() => {
                         }}>
                             {occupation.map(i => <option key={i} value={i.toUpperCase()}>{i}</option>)}
                         </select>
+                        {errors.occupation && <i>occupation.error.required</i>}
                     </div>
                     <input type="submit"/>
                 </div>
