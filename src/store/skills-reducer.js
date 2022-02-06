@@ -1,16 +1,15 @@
-const ADD_SKILL = 'ADD_SKILL'
-const ONCHANGE_SKILL_INFO = 'ONCHANGE_SKILL_INFO'
+const SET_SKILL = 'ADD_SKILL'
 const REMOVE_SKILL = 'REMOVE_SKILL'
 const SAVE_SKILLS = 'SAVE_SKILLS'
 
-const initialState = {}
+const initialState = {
+    skills: []
+}
 
 const skillsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_SKILL:
-            return {...state, skill: action.payload}
-        case ONCHANGE_SKILL_INFO:
-            return {...state, newInfo: action.payload}
+        case SET_SKILL:
+            return {...state, skills: [...state.skills, action.payload[0]] }
         case REMOVE_SKILL:
             return {...state}
         case SAVE_SKILLS:
@@ -20,9 +19,8 @@ const skillsReducer = (state = initialState, action) => {
     }
 }
 
-export const addSkill = (skill) => ({type: ADD_SKILL, payload:skill})
-export const onChangeSkillInfo = (newInfo) => ({type: ONCHANGE_SKILL_INFO, payload: newInfo})
+export const setSkill = (skill) => ({type: SET_SKILL, payload:skill})
 export const removeSkill = (skill) => ({type: REMOVE_SKILL, skill})
-export const saveSkills = (skills) => ({type: SAVE_SKILLS, skills})
+export const sandSkills = (skills) => ({type: SAVE_SKILLS, skills})
 
 export default skillsReducer

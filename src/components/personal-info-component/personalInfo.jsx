@@ -25,6 +25,7 @@ const PersonalInfoComponent = () => {
         dispatch(sendPersonalInfo(newData))
         console.log(newData)
         e.target.reset()
+
     }
     if(occupation) {
     return (

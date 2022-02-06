@@ -2,6 +2,8 @@ const ADD_PERSONAL_INFO = 'ADD_PERSONAL_INFO'
 const GET_OCCUPATION = 'GET_OCCUPATION'
 
 const initialState = {
+    firstName: '',
+    secondName: '',
     occupation: []
 }
 
