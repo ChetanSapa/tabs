@@ -1,18 +1,23 @@
 import {useForm} from "react-hook-form";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {setSkill} from "../../store/skills-reducer";
+import {removeSkill, setSkill} from "../../store/skills-reducer";
 import {sendSkillsInfo} from "../../api/api";
 
 
 const SkillsComponent = () => {
 
-    const skills = useSelector((state) => state.skills.skills)
+    const skills = useSelector((state) => state.skills)
     const dispatch = useDispatch()
-
+    console.log(skills)
     const sendSkills = (skills) => {
-        sendSkillsInfo(skills)
+       dispatch(sendSkillsInfo(skills))
         console.log(skills)
+    }
+
+    const deleteSkill = (skill) => {
+        console.log(skill)
+        dispatch(removeSkill(skill))
     }
     useEffect(() => {
         console.log(skills)
@@ -22,6 +27,7 @@ const SkillsComponent = () => {
         register,
         handleSubmit,
         formState: {errors},
+        reset
     } = useForm({mode: "onChange"})
 
     const onSubmit = (data, e) => {
@@ -29,6 +35,7 @@ const SkillsComponent = () => {
         dispatch(setSkill(skill))
         console.log(data)
         e.target.reset()
+        reset({})
     }
     return (<div>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -45,7 +52,7 @@ const SkillsComponent = () => {
                 </div>
             </form>
             <div>
-                <SkillsList skills={skills}/>
+                <SkillsList skills={skills} deleteSkill={deleteSkill}/>
             </div>
 
             <button style={{marginTop: '1rem'}} type='submit' onClick={() => sendSkills(skills)}>Save</button>
@@ -54,14 +61,14 @@ const SkillsComponent = () => {
 }
 
 const SkillsList = (props) => {
-
+    console.log(props)
     return <div>
         {props.skills ? props.skills.map((s) =>
-            <div>
-            <input key={s} type="text" value={s}/>
-                <button> -</button>
+            <div key={s}>
+            <input type="text" defaultValue={s}/>
+                <button onClick={() => props.deleteSkill(s)}> - </button>
             </div>
-        ).reverse() : <span>Some error</span>}
+        ).reverse() : null}
     </div>
 }
 export default SkillsComponent

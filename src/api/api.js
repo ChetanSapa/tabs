@@ -1,4 +1,5 @@
 import {addPersonalInfo, getOccupation,} from "../store/personal-info-reducer";
+import {resetState} from "../store/skills-reducer";
 
 const url = 'https://jsonplaceholder.typicode.com/'
 
@@ -32,17 +33,20 @@ export const sendPersonalInfo = (data) => {
     }
 }
 export const sendSkillsInfo = (data) => {
-        fetch(url + 'posts', {
-            method: 'POST',
-            body: JSON.stringify({
-                data
-            }),
-            headers: {
-                'Content-type': 'application/json; charset=UTF-8',
-            },
-        })
-            .then(response => response.json())
-            .then(response => {
-                    console.log(response)
+        return dispatch => {
+            fetch(url + 'posts', {
+                method: 'POST',
+                body: JSON.stringify({
+                    data
+                }),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
             })
+                .then(response => response.json())
+                .then(response => {
+                    dispatch(resetState())
+                    console.log(response)
+                })
+        }
 }

@@ -16,6 +16,7 @@ const PersonalInfoComponent = () => {
         register,
         handleSubmit,
         formState: {errors},
+        reset
     } = useForm({mode: "onChange"})
 
     function onSubmit(data, e) {
@@ -25,6 +26,7 @@ const PersonalInfoComponent = () => {
         dispatch(sendPersonalInfo(newData))
         console.log(newData)
         e.target.reset()
+        reset({})
 
     }
     if(occupation) {
