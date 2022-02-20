@@ -40,7 +40,7 @@ const SkillsComponent = () => {
     return (<div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
-                    <div style={{marginTop: '1rem'}}>
+                    <div className={'main'}>
                         <div>Skills</div>
                         <input type="text" {...register('Skill', {
                             required: true,

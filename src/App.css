@@ -1,38 +1,68 @@
-.App {
-  text-align: center;
+.main-app {
+    display: flex;
+    flex-direction: column;
+    margin: 5rem 2rem;
+    border: 2px solid lightgray;
+    border-radius: 15px;
+    width: 50%;
+    font-family: Verdana;
+    font-size: 14px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-app {
+    display: flex;
+    justify-content: flex-start;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+a {
+    text-decoration: none;
+    color: grey;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.active {
+    color: blue;
+    border-bottom: 2px solid blue;
 }
 
-.App-link {
-  color: #61dafb;
+.navLink {
+    margin: 0 3rem;
+    padding: 1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.mainPersonalInfo {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.inputPersonalInfo {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.inputPersonalInfo input, select {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 18rem;
+}
+
+.submitPersonalInfo {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0rem 2rem 1rem 0rem;
+}
+
+.submitPersonalInfo input {
+    border-radius: 5px;
+    color: white;
+    background-color: blue;
+    height: 2rem;
+}
+
+.leftSide .rightSide {
+    display: flex;
+    flex-direction: column;
 }

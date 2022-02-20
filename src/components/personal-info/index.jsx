@@ -2,6 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useForm} from "react-hook-form";
 import React, {useEffect} from "react";
 import {fetchOccupation, sendPersonalInfo} from "../../api/api";
+import '../../App.css'
 
 const PersonalInfoComponent = () => {
     const dispatch = useDispatch()
@@ -33,27 +34,21 @@ const PersonalInfoComponent = () => {
     return (
 
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                padding: '20px',
-                border: '1px, grey solid',
-            }}>
-                <div>
-                    <div>
+            <div className={'mainPersonalInfo'}>
+                <div className={'leftSide'}>
+                    <div className={"inputPersonalInfo"}>
                         <div>First Name</div>
                         <input {...register('firstName', {required: true, maxLength: 15})}/>
                         {errors.firstName && <i>name.error.required</i>}
                     </div>
-                    <div>
+                    <div className={"inputPersonalInfo"}>
                         <div>Surname</div>
                         <input type="text" {...register('lastName', {required: true})}/>
                         {errors.lastName && <i>surname.error.required</i>}
                     </div>
                 </div>
-                <div>
-                    <div>
+                <div className={'rightSide'}>
+                    <div className={'inputPersonalInfo'}>
                         <div>Occupation</div>
                         <select  {...register('occupation', {required: true})} onChange={() => {
                         }}>
@@ -61,8 +56,10 @@ const PersonalInfoComponent = () => {
                         </select>
                         {errors.occupation && <i>occupation.error.required</i>}
                     </div>
-                    <input type="submit"/>
                 </div>
+            </div>
+            <div className={'submitPersonalInfo'}>
+                <input type="submit"/>
             </div>
         </form>
     )}
