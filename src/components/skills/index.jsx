@@ -1,27 +1,21 @@
 import {useForm} from "react-hook-form";
-import React, {useEffect} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {removeSkill, setSkill} from "../../store/skills-reducer";
 import {sendSkillsInfo} from "../../api/api";
 
 
 const SkillsComponent = () => {
-
     const skills = useSelector((state) => state.skills)
     const dispatch = useDispatch()
-    console.log(skills)
     const sendSkills = (skills) => {
-       dispatch(sendSkillsInfo(skills))
-        console.log(skills)
+        dispatch(sendSkillsInfo(skills))
     }
-
     const deleteSkill = (skill) => {
-        console.log(skill)
         dispatch(removeSkill(skill))
     }
-    useEffect(() => {
-        console.log(skills)
-    },[skills])
+    // useEffect(() => {
+    // }, [skills])
 
     const {
         register,
@@ -32,41 +26,42 @@ const SkillsComponent = () => {
 
     const onSubmit = (data, e) => {
         let skill = Object.values(data)
+        console.log(skill)
         dispatch(setSkill(skill))
         console.log(data)
         e.target.reset()
         reset({})
     }
-    return (<div>
+    return (<div className={'mainSkillsCont'}>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <div className={'main'}>
-                        <div>Skills</div>
+                <div className={'SkillsCont'}>
+                    <span>Skills</span>
+                    <div className={'addSkillInput'}>
                         <input type="text" {...register('Skill', {
                             required: true,
                             maxLength: 25
                         })}/>
-                        <button>+</button>
-                        {errors.Skill && <i>Skill.error.required</i>}
+                        <button className={'addSkillButton'}>+</button>
                     </div>
+                    {errors.Skill && <i className={'errorStyle'}>Field required</i>}
                 </div>
             </form>
             <div>
                 <SkillsList skills={skills} deleteSkill={deleteSkill}/>
             </div>
-
-            <button style={{marginTop: '1rem'}} type='submit' onClick={() => sendSkills(skills)}>Save</button>
+            <div className={'submitButton'}>
+                <input type="submit" onClick={() => sendSkills(skills)}/>
+            </div>
         </div>
     )
 }
 
 const SkillsList = (props) => {
-    console.log(props)
-    return <div>
+    return <div className={'skillsListCont'}>
         {props.skills ? props.skills.map((s) =>
-            <div key={s}>
-            <input type="text" defaultValue={s}/>
-                <button onClick={() => props.deleteSkill(s)}> - </button>
+            <div key={s} className={'removeSkillInput'}>
+                <input type="text" defaultValue={s}/>
+                <button className={'removeSkillButton'} onClick={() => props.deleteSkill(s)}> -</button>
             </div>
         ).reverse() : null}
     </div>

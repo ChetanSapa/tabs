@@ -1,17 +1,27 @@
+body {
+    margin: 0;
+    padding: 0;
+}
 .main-app {
     display: flex;
     flex-direction: column;
     margin: 5rem 2rem;
     border: 2px solid lightgray;
     border-radius: 15px;
-    width: 50%;
-    font-family: Verdana;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    padding: 10px;
+    width: 45%;
     font-size: 14px;
 }
-
+.nav {
+    /*border-bottom: 2px solid grey;*/
+}
 .nav-app {
     display: flex;
     justify-content: flex-start;
+    margin: 0 -11px 4px -11px;
+    border-bottom: 2px solid lightgray;
+    padding: 0;
 }
 
 a {
@@ -20,28 +30,31 @@ a {
 }
 
 .active {
-    color: blue;
-    border-bottom: 2px solid blue;
+    color: darkblue;
+    border-bottom: 2px solid darkblue;
 }
 
 .navLink {
+    position: relative;
+    bottom: -2px;
     margin: 0 3rem;
     padding: 1rem;
 }
 
-.mainPersonalInfo {
+.mainPersonalInfoCont {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
 }
+.mainSkillsCont {
 
-.inputPersonalInfo {
+}
+
+.personalInfoInput {
     display: flex;
     flex-direction: column;
     padding: 1rem;
 }
-
-.inputPersonalInfo input, select {
+.personalInfoInput  input, select {
     margin-top: 10px;
     padding: 10px;
     border: 1px solid grey;
@@ -49,20 +62,59 @@ a {
     width: 18rem;
 }
 
-.submitPersonalInfo {
+.SkillsCont {
     display: flex;
-    justify-content: flex-end;
-    padding: 0rem 2rem 1rem 0rem;
+    flex-direction: column;
+    margin: 1rem 0 0 1rem;
+    /*border: 1px solid gray;*/
+}
+.addSkillInput input{
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 18rem;
+}
+.removeSkillInput input {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 18rem;
+}
+.skillsListCont {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin:0 0 1rem 1rem;
+}
+.addSkillButton, .removeSkillButton{
+    width: 3rem;
+    height: 1.5rem;
+    margin-left: 1rem;
+    font-weight: bolder;
+    color: white;
+    background-color: darkblue ;
+    border-radius: 5px;
 }
 
-.submitPersonalInfo input {
+.submitButton {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 2rem 1rem 0;
+}
+
+.submitButton input {
     border-radius: 5px;
     color: white;
-    background-color: blue;
+    background-color: darkblue;
     height: 2rem;
 }
 
 .leftSide .rightSide {
     display: flex;
     flex-direction: column;
+}
+.errorStyle {
+    color: red;
 }

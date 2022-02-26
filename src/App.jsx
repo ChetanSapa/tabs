@@ -11,7 +11,7 @@ function App() {
         <BrowserRouter>
             <div className={'main-app'}>
                 <Navbar/>
-                <div>
+                <div className={'test'}>
                     <Routes>
                         <Route exact path={'/'} element={<PersonalInfoComponent/>}/>
                         <Route path="/skills" element={<SkillsComponent/>}/>

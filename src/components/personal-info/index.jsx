@@ -30,39 +30,42 @@ const PersonalInfoComponent = () => {
         reset({})
 
     }
-    if(occupation) {
-    return (
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className={'mainPersonalInfo'}>
-                <div className={'leftSide'}>
-                    <div className={"inputPersonalInfo"}>
-                        <div>First Name</div>
-                        <input {...register('firstName', {required: true, maxLength: 15})}/>
-                        {errors.firstName && <i>name.error.required</i>}
+    if (occupation) {
+        return (
+            <div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <div className={'mainPersonalInfoCont'}>
+                        <div className={'leftSide'}>
+                            <div className={"personalInfoInput"}>
+                                <div>First Name</div>
+                                <input {...register('firstName', {required: true, maxLength: 15})}/>
+                                {errors.firstName && <i className={'errorStyle'}>Field required</i>}
+                            </div>
+                            <div className={"personalInfoInput"}>
+                                <div>Second name</div>
+                                <input type="text" {...register('lastName', {required: true})}/>
+                                {errors.lastName && <i className={'errorStyle'}>Field required</i>}
+                            </div>
+                        </div>
+                        <div className={'rightSide'}>
+                            <div className={'personalInfoInput'}>
+                                <div>Occupation</div>
+                                <select  {...register('occupation', {required: true})} onChange={() => {
+                                }}>
+                                    {occupation.map(i => <option key={i} value={i.toUpperCase()}>{i}</option>)}
+                                </select>
+                                {errors.occupation && <i className={'errorStyle'}>Field required</i>}
+                            </div>
+                        </div>
                     </div>
-                    <div className={"inputPersonalInfo"}>
-                        <div>Surname</div>
-                        <input type="text" {...register('lastName', {required: true})}/>
-                        {errors.lastName && <i>surname.error.required</i>}
+                    <div className={'submitButton'}>
+                        <input type="submit"/>
                     </div>
-                </div>
-                <div className={'rightSide'}>
-                    <div className={'inputPersonalInfo'}>
-                        <div>Occupation</div>
-                        <select  {...register('occupation', {required: true})} onChange={() => {
-                        }}>
-                            {occupation.map(i => <option key={i} value={i.toUpperCase()}>{i}</option>)}
-                        </select>
-                        {errors.occupation && <i>occupation.error.required</i>}
-                    </div>
-                </div>
+                </form>
             </div>
-            <div className={'submitPersonalInfo'}>
-                <input type="submit"/>
-            </div>
-        </form>
-    )}
+        )
+    }
 }
 
 export default PersonalInfoComponent
