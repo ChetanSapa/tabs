@@ -61,7 +61,7 @@ const SkillsList = (props) => {
         {props.skills ? props.skills.map((s) =>
             <div key={s} className={'removeSkillInput'}>
                 <input type="text" defaultValue={s}/>
-                <button className={'removeSkillButton'} onClick={() => props.deleteSkill(s)}> -</button>
+                <button  className={'removeSkillButton'} onClick={() => props.deleteSkill(s)}> -</button>
             </div>
         ).reverse() : null}
     </div>
